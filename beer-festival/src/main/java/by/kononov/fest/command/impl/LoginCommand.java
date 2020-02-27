@@ -22,7 +22,7 @@ import by.kononov.fest.service.impl.UserServiceImpl;
 
 /**
  * The LoginCommand class; it implements the BaseCommand interface; it
- * is used to login and password confirmation.
+ * is used for login and password confirmation.
  * <p>
  * {@link by.kononov.fest.command.BaseCommand}
  * 
