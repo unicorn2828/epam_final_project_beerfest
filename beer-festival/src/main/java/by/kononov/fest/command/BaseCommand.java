@@ -14,7 +14,7 @@ import by.kononov.fest.controller.SessionRequestContent;
 public interface BaseCommand{
 
 	/**
-	 * This method returns string of path to jsp page.
+	 * This method returns PagePath object with the path to jsp page.
 	 *
 	 * @param content - SessionRequestContent object {@link package
 	 *                by.konanau.fest.controller.SessionRequestContent};
