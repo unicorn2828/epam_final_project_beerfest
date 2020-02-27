@@ -20,7 +20,7 @@ public class PageReceiver{
 	private static final String PAGE_ADMIN_BAR = "path.page.admin_bar";
 
 	/**
-	 * The private class constructor to hide the implicit public one.
+	 * The private class constructor is used to hide the implicit public one.
 	 */
 	private PageReceiver() {
 	}
@@ -55,8 +55,8 @@ public class PageReceiver{
 	 * ConfigurationManager to get the correct path from config file
 	 * {@link package by.konanau.fest.manager.ConfigurationManager}
 	 *
-	 * @param user - User.class object to get the role
-	 * @return page - the string with the path to jsp
+	 * @param user - User.class object to get the role;
+	 * @return page - the string with the path to jsp;
 	 */
 	private static String receiveHomePage(User user) {
 		String page = ConfigurationManager.getProperty(PAGE_LOGIN);
