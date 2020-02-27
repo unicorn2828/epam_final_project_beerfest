@@ -23,7 +23,7 @@ class OrderProducer{
 	private static final String ORDER_COMMENT = "order_comment";
 
 	/**
-	 * The private class constructor to hide the implicit public one.
+	 * The private class constructor is uses to hide the implicit public one.
 	 */
 	private OrderProducer() {
 	}
