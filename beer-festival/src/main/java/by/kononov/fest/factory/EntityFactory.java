@@ -18,7 +18,7 @@ public class EntityFactory{
 	private static final EntityFactory INSTANCE = new EntityFactory();
 
 	/**
-	 * The private class constructor to hide the implicit public one.
+	 * The private class constructor is uses to hide the implicit public one.
 	 */
 	private EntityFactory() {
 	}
