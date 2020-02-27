@@ -27,7 +27,7 @@ class UserProducer{
 	private static final String AVATAR = "avatar_url";
 
 	/**
-	 * The private class constructor to hide the implicit public one.
+	 * The private class constructor is uses to hide the implicit public one.
 	 */
 	private UserProducer() {
 	}
