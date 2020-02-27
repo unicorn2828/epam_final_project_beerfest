@@ -18,7 +18,7 @@ public class ImageFileValidator{
 	private static final List<String> IMAGE_FORMAT = Arrays.asList(".JPG", ".PNG", ".GIF");
 
 	/**
-	 * The private class constructor to hide the implicit public one.
+	 * The private class constructor is used to hide the implicit public one.
 	 */
 	private ImageFileValidator() {
 	}
@@ -26,10 +26,10 @@ public class ImageFileValidator{
 	/**
 	 * This method checks if the file matches size and image file formats.
 	 *
-	 * @param fileName - the fileName to be check format
-	 * @param filePart - the filePart to be check size
+	 * @param fileName - the fileName to check format;
+	 * @param filePart - the filePart to check size;
 	 * @return - <code>true</code> if the string completely matches;
-	 *         <code>false</code> otherwise
+	 *         <code>false</code> otherwise;
 	 */
 	public static boolean isImageFile(String fileName, Part filePart) {
 		String lastThree = fileName.substring(fileName.length() - 4).toUpperCase();
