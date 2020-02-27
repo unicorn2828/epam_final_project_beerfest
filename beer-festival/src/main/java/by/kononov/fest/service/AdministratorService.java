@@ -16,7 +16,7 @@ import by.kononov.fest.exception.ServiceException;
 public interface AdministratorService{
 
 	/**
-	 * This method is used to receive a list of bars.
+	 * This method is used to receive the list of bars.
 	 *
 	 * @throws ServiceException if query to repository failed;
 	 * @return - a list of bars;
@@ -24,7 +24,7 @@ public interface AdministratorService{
 	List<Entity> receiveBar() throws ServiceException;
 
 	/**
-	 * This method is used to receive a list of orders.
+	 * This method is used to receive the list of orders.
 	 *
 	 * @throws ServiceException if query to repository failed;
 	 * @return - a list of orders;
@@ -32,7 +32,7 @@ public interface AdministratorService{
 	List<Entity> receiveOrder() throws ServiceException;
 
 	/**
-	 * This method is used to receive a list of partners.
+	 * This method is used to receive the list of partners.
 	 *
 	 * @throws ServiceException if query to repository failed;
 	 * @return - a list of partners;
@@ -40,7 +40,7 @@ public interface AdministratorService{
 	List<Entity> receivePartner() throws ServiceException;
 
 	/**
-	 * This method is used to receive a list of users.
+	 * This method is used to receive the list of users.
 	 *
 	 * @throws ServiceException if query to repository failed;
 	 * @return - a list of users;
@@ -48,7 +48,7 @@ public interface AdministratorService{
 	List<Entity> receiveUser(String pageNumber) throws ServiceException;
 
 	/**
-	 * This method is used to get the number of pagination pages.
+	 * This method is used to get the amount of pagination pages.
 	 *
 	 * @param pageNumber - amount of pages for pagination;
 	 * @throws ServiceException if query to repository failed;
