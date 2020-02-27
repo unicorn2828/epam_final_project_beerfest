@@ -12,7 +12,7 @@ import by.kononov.fest.entity.User;
 
 /**
  * The LanguageCommand class; it implements the BaseCommand interface;
- * it is used to choose the language of interface.
+ * it is used to choose the language of the interface.
  * <p>
  * {@link by.kononov.fest.command.BaseCommand}
  * 
