@@ -24,7 +24,7 @@ public class CommandProvider{
 	private static final String USER = "user";
 
 	/**
-	 * The private class constructor to hide the implicit public one.
+	 * The private class constructor is used to hide the implicit public one.
 	 */
 	private CommandProvider() {
 	}
