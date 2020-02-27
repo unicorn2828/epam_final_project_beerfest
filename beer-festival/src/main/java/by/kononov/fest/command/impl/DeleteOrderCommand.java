@@ -16,7 +16,7 @@ import by.kononov.fest.service.impl.UserServiceImpl;
 
 /**
  * The DeleteOrderCommand class; it implements the BaseCommand
- * interface; it is used to delete an order.
+ * interface; it is used to delete user's order.
  * <p>
  * {@link by.kononov.fest.command.BaseCommand}
  * 
