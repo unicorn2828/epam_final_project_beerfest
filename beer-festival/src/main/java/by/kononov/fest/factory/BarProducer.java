@@ -23,7 +23,7 @@ class BarProducer{
 	private static final String BAR_NAME = "bar_name";
 
 	/**
-	 * The private class constructor to hide the implicit public one.
+	 * The private class constructor is uses to hide the implicit public one.
 	 */
 	private BarProducer() {
 	}
