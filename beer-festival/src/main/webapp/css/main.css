@@ -1,0 +1,165 @@
+#myModalBox {
+	text-align: center;
+}
+
+.modal {
+	text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+	.modal:before {
+		display: inline-block;
+		vertical-align: middle;
+		content: " ";
+		height: 100%;
+	}
+}
+
+.modal-dialog {
+	display: inline-block;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.modal-body {
+	background-color: #FFFFFF;
+}
+
+.modal-content {
+	border-radius: 6px;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	background-color: transparent;
+}
+
+.modal-footer {
+	background-color: #FFFFFF;
+}
+
+.modal-header {
+	background: linear-gradient(to left, black, #07BFD5, black);
+	color: white;
+}
+
+.btn btn-primary center-block {
+	color: #0066ff;
+}
+
+.jumbotron {
+	text-align: center;
+	background-color: rgba(0, 0, 0, .8);
+	color: white;
+	width: 100%;
+	margin: auto;
+	padding: 10px;
+}
+
+.panel-body {
+	color: black;
+}
+
+.navbar-inverse {
+	background: linear-gradient(to left, black, #07BFD5, black);
+	border-color: #white;
+}
+
+.avatar {
+	vertical-align: middle;
+	width: 50px;
+	height: 50px;
+	border-radius: 20%;
+}
+
+.btn {
+	background-color: #07BFD5;
+	color: white;
+}
+
+body {
+	animation: fadeInAnimation ease 1s;
+	animation-iteration-count: 1;
+	animation-fill-mode: forwards;
+}
+
+@keyframes fadeInAnimation { 
+	0% { opacity: 0;}
+  100% { opacity: 1;}
+}
+
+#myModalBox {
+	text-align: center;
+}
+
+.modal {
+	text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+	.modal:before {
+		display: inline-block;
+		vertical-align: middle;
+		content: " ";
+		height: 100%;
+	}
+}
+
+.modal-dialog {
+	display: inline-block;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.modal-body {
+	background-color: #FFFFFF;
+}
+
+.modal-content {
+	border-radius: 6px;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	background-color: transparent;
+}
+
+.modal-footer {
+	background-color: #FFFFFF;
+}
+
+.modal-header {
+	background: linear-gradient(to left, black, #07BFD5, black);
+	color: white;
+}
+
+.btn btn-primary center-block {
+	color: #0066ff;
+}
+
+.jumbotron {
+	text-align: center;
+	background-color: rgba(0, 0, 0, .8);
+	color: white;
+	width: 100%;
+	margin: auto;
+	padding: 10px;
+}
+
+.panel-body {
+	color: black;
+}
+
+.well {
+	text-align: center;
+	background-color: rgba(0, 0, 0, .8);
+	color: white;
+	width: 50%;
+	margin: auto;
+	width: 60%;
+	border: 3px solid white;
+	padding: 10px;
+}
+
+.carousel-caption {
+	top: 200px;
+	text-align: left;
+	position: relative max-width: 500px;
+	padding: 5px;
+}

@@ -1,0 +1,13 @@
+Description
+
+This project is called Beer Festival. It represents a web application of a Beer Festival.  
+Each visitor of the site must register, because the access to the site is possible only through login and password confirmation. 
+There are three kinds of users: user, partner and administrator. The role of the user is defined automatically by login. A visitor may choose a role during registration, but he can choose only between user and partner; no one can choose the administrator role. 
+User can watch news, photo gallery; change the avatar of his profile, watch available bars, book or cancel the order. 
+Partner can watch news, photo gallery; rent a bar for commercial duty, cancel rent. 
+Administrator can watch all users, block (or unblock) any user, except administrator, watch bars, orders, photo gallery. 
+After registration, the email to the user with the text about the successful registration is sent automatically. 
+Each user has a possibility to change the language of the interface. There are three languages to choose from: Belarusian, Russian and English.
+All information is stored in a database MySql.   
+The following technologies are used in the project: Servlet, JDBC, Gof patterns (such as factory, singleton, repository, MVC, command, proxy and other). All important queries to the database are made through the transaction.
+
