@@ -19,7 +19,7 @@ import by.kononov.fest.service.impl.AdministratorServiceImpl;
 
 /**
  * The PartnerCommand class; it implements the BaseCommand interface;
- * it is used to recieve the list of partners.
+ * it is used to receive the list of partners.
  * <p>
  * {@link by.kononov.fest.command.BaseCommand}
  * 
