@@ -20,7 +20,7 @@ import by.kononov.fest.service.impl.AdministratorServiceImpl;
 
 /**
  * The BarCommand class; it implements the BaseCommand interface; it
- * is used to recieve the list of bars.
+ * is used to receive the list of bars.
  * <p>
  * {@link by.kononov.fest.command.BaseCommand}
  * 
