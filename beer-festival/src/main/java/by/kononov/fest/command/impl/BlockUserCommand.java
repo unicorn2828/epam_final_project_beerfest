@@ -18,7 +18,7 @@ import by.kononov.fest.service.impl.AdministratorServiceImpl;
 
 /**
  * The BlockUserCommand class; it implements the BaseCommand
- * interface; it is used to block or unblock eny user.
+ * interface; it is used to block or unblock any user.
  * <p>
  * {@link by.kononov.fest.command.BaseCommand}
  * 
