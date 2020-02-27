@@ -18,7 +18,7 @@ import by.kononov.fest.service.impl.AdministratorServiceImpl;
 
 /**
  * The UserCommand class; it implements the BaseCommand interface; it
- * is used to recieve the list of users.
+ * is used to receive the list of users.
  * <p>
  * {@link by.kononov.fest.command.BaseCommand}
  * 
