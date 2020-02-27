@@ -107,7 +107,7 @@ public enum ConnectionPool {
 	}
 
 	/**
-	 * This method destroys the connection pool. It calls only one time
+	 * This method destroys the connection pool. It is called only one time
 	 * then the program is ended.
 	 */
 	public void destroyPool() {
@@ -126,7 +126,7 @@ public enum ConnectionPool {
 	}
 
 	/**
-	 * This method unregisters the drivers of db. It calls only one time
+	 * This method unregisters the drivers of db. It is called only one time
 	 * then the program is ended.
 	 */
 	private void deregisterDrivers() {
