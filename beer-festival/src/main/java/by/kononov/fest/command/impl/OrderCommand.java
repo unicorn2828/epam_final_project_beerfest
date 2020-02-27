@@ -17,7 +17,7 @@ import by.kononov.fest.service.impl.AdministratorServiceImpl;
 
 /**
  * The OrderCommand class; it implements the BaseCommand interface; it
- * is used to recieve the list of orders.
+ * is used to receive the list of orders.
  * <p>
  * {@link by.kononov.fest.command.BaseCommand}
  * 
