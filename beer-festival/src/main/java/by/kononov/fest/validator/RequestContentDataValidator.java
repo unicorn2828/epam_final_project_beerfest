@@ -13,17 +13,17 @@ import java.util.Optional;
 public class RequestContentDataValidator{
 
 	/**
-	 * The private class constructor to hide the implicit public one.
+	 * The private class constructor is used to hide the implicit public one.
 	 */
 	private RequestContentDataValidator() {
 	}
 
 	/**
-	 * This method checks if the exists.
+	 * This method checks if the data exists.
 	 *
 	 * @param params - the Optional parameters to verify;
 	 * @return - <code>true</code> if the parameter exists;
-	 *         <code>false</code> otherwise
+	 *         <code>false</code> otherwise;
 	 */
 	@SafeVarargs
 	public static boolean isDataExist(Optional<String>... params) {
