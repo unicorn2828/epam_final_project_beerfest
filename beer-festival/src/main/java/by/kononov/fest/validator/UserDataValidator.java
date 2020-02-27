@@ -22,7 +22,7 @@ public class UserDataValidator{
 	private final static Pattern PASSWORD_REGEX = Pattern.compile("^[a-zA-Z0-9._-]{3,12}$");
 
 	/**
-	 * The private class constructor to hide the implicit public one.
+	 * The private class constructor is used to hide the implicit public one.
 	 */
 	private UserDataValidator() {
 	}
@@ -31,9 +31,9 @@ public class UserDataValidator{
 	 * This method checks if the string 'login' matches the given regular
 	 * expression.
 	 *
-	 * @param login - the login to be check
+	 * @param login - the login to check;
 	 * @return - <code>true</code> if the string completely matches
-	 *         regular expression; <code>false</code> otherwise
+	 *         regular expression; <code>false</code> otherwise;
 	 */
 	public static boolean isLogin(String login) {
 		Matcher matcher = LOGIN_REGEX.matcher(login);
@@ -44,9 +44,9 @@ public class UserDataValidator{
 	 * This method checks if the string 'password' matches the given
 	 * regular expression.
 	 *
-	 * @param login - the login to be check
+	 * @param login - the login to check;
 	 * @return - <code>true</code> if the string completely matches
-	 *         regular expression; <code>false</code> otherwise
+	 *         regular expression; <code>false</code> otherwise;
 	 */
 	public static boolean isPassword(String password) {
 		Matcher matcher = PASSWORD_REGEX.matcher(password);
@@ -57,9 +57,9 @@ public class UserDataValidator{
 	 * This method checks if the string 'email' matches the given regular
 	 * expression. It uses Apache Commons Validator » 1.3.1
 	 *
-	 * @param login - the login to be check
+	 * @param login - the login to check;
 	 * @return - <code>true</code> if the string completely matches
-	 *         regular expression; <code>false</code> otherwise
+	 *         regular expression; <code>false</code> otherwise;
 	 */
 	public static boolean isEmail(String email) {
 		boolean result = true;
