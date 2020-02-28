@@ -50,7 +50,6 @@ public interface AdministratorService{
 	/**
 	 * This method is used to get the amount of pagination pages.
 	 *
-	 * @param pageNumber - amount of pages for pagination;
 	 * @throws ServiceException if query to repository failed;
 	 * @return - amount of pages;
 	 */
