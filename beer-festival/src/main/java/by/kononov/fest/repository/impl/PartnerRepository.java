@@ -19,20 +19,11 @@ import by.kononov.fest.factory.EntityFactory;
 import by.kononov.fest.specification.FestSpecification;
 
 public class PartnerRepository extends BaseRepository{
-	private final static BaseRepository INSTANCE = new PartnerRepository();
-	static final Logger logger = LogManager.getLogger();
 	public static final String SQL_INSERT_PARTNER =
 			"INSERT INTO fest.partner (partner_id, name, description, partner_bar) VALUES (?, ?, ?, ?)";
 	public static final String SQL_DELETE_PARTNER = "DELETE FROM fest.user WHERE user_id = ?";
 	public static final String SQL_UPDATE_PARTNER =
 			"UPDATE fest.partner SET name = ?, description = ?, partner_bar = ? WHERE partner_id = ?";
-
-	private PartnerRepository() {
-	}
-
-	public static BaseRepository getInstance() {
-		return INSTANCE;
-	}
 
 	@Override
 	public void addEntity(Entity partner) throws RepositoryException {
