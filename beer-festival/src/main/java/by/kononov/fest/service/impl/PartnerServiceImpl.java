@@ -35,18 +35,12 @@ import by.kononov.fest.transaction.impl.TransactionImpl;
  */
 public class PartnerServiceImpl implements PartnerService{
 	private static final String DEFAULT = "default";
-	private Transaction transaction;
 	private Repository barRepository;
-	private Repository userRepository;
-	private Repository orderRepository;
 	private Repository partnerRepository;
 
 	public PartnerServiceImpl() {
-		transaction = new TransactionImpl();
-		barRepository = BarRepository.getInstance();
-		userRepository = UserRepository.getInstance();
-		orderRepository = OrderRepository.getInstance();
-		partnerRepository = PartnerRepository.getInstance();
+		barRepository = new BarRepository();
+		partnerRepository =  new PartnerRepository();
 	}
 
 	@Override
@@ -71,12 +65,21 @@ public class PartnerServiceImpl implements PartnerService{
 		Order defaultOrder = new Order(0, defaultBar, 0, DEFAULT);
 		user.setOrder(defaultOrder);
 		partner.setBar(defaultBar.getBarId());
-		transaction.beginTransaction(partnerRepository, barRepository, orderRepository, userRepository);
+		Transaction transaction = new TransactionImpl();
+		PartnerRepository partnerRepositoryInTransaction = new PartnerRepository();
+		BarRepository barRepositoryInTransaction = new BarRepository();
+		OrderRepository orderRepositoryInTransaction = new OrderRepository();
+		UserRepository userRepositoryInTransaction = new UserRepository();
+		transaction.beginTransaction(
+				partnerRepositoryInTransaction,
+				barRepositoryInTransaction,
+				orderRepositoryInTransaction,
+				userRepositoryInTransaction);
 		try {
-			partnerRepository.updateEntity(partner);
-			barRepository.updateEntity(bar);
-			orderRepository.deleteEntity(order);
-			userRepository.updateEntity(user);
+			partnerRepositoryInTransaction.updateEntity(partner);
+			barRepositoryInTransaction.updateEntity(bar);
+			orderRepositoryInTransaction.deleteEntity(order);
+			userRepositoryInTransaction.updateEntity(user);
 			transaction.commit();
 		} catch (RepositoryException e) {
 			transaction.rollback();
@@ -103,9 +106,11 @@ public class PartnerServiceImpl implements PartnerService{
 	public Partner registerPartner(long partnerId, String name, String description) throws ServiceException {
 		int bar = 0;
 		Partner partner = new Partner(partnerId, name, description, bar);
-		transaction.beginTransaction(partnerRepository);
+		Transaction transaction = new TransactionImpl();
+		PartnerRepository partnerRepositoryInTransaction = new PartnerRepository();
+		transaction.beginTransaction(partnerRepositoryInTransaction);
 		try {
-			partnerRepository.addEntity(partner);
+			partnerRepositoryInTransaction.addEntity(partner);
 			transaction.commit();
 		} catch (RepositoryException e) {
 			transaction.rollback();
@@ -118,7 +123,16 @@ public class PartnerServiceImpl implements PartnerService{
 
 	private void registerLogic(User user, Partner partner, String barName, String comment, String barId)
 			throws ServiceException {
-		transaction.beginTransaction(barRepository, userRepository, orderRepository, partnerRepository);
+		Transaction transaction = new TransactionImpl();
+		PartnerRepository partnerRepositoryInTransaction = new PartnerRepository();
+		BarRepository barRepositoryInTransaction = new BarRepository();
+		OrderRepository orderRepositoryInTransaction = new OrderRepository();
+		UserRepository userRepositoryInTransaction = new UserRepository();
+		transaction.beginTransaction(
+				barRepositoryInTransaction,
+				userRepositoryInTransaction,
+				orderRepositoryInTransaction,
+				partnerRepositoryInTransaction);
 		FestSpecification specification = new ReceivingBarByIdSpecification(barId);
 		try {
 			List<Entity> barList = barRepository.query(specification);
@@ -126,13 +140,13 @@ public class PartnerServiceImpl implements PartnerService{
 			if (Bar.BarStatus.AVAILABLE.equals(currentBar.getStatus())) {
 				currentBar.setName(barName);
 				currentBar.setStatus(Bar.BarStatus.OCCUPIED);
-				barRepository.updateEntity(currentBar);
+				barRepositoryInTransaction.updateEntity(currentBar);
 				Order order = new Order(user.getUserId(), currentBar, 0, comment);
 				user.setOrder(order);
-				orderRepository.addEntity(order);
+				orderRepositoryInTransaction.addEntity(order);
 				partner.setBar(currentBar.getBarId());
-				partnerRepository.updateEntity(partner);
-				userRepository.updateEntity(user);
+				partnerRepositoryInTransaction.updateEntity(partner);
+				userRepositoryInTransaction.updateEntity(user);
 				transaction.commit();
 			}
 		} catch (RepositoryException e) {
