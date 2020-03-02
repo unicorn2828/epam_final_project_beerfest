@@ -110,20 +110,25 @@ public enum ConnectionPool {
 	 * This method destroys the connection pool. It is called only one time
 	 * then the program is ended.
 	 */
-	public void destroyPool() {
-		for (int i = 0; i < poolSize; i++) {
-			try {
-				availableConnections.take().relevantClose();
-			} catch (SQLException e) {
-				logger.error("can't close connection ", e);
-			} catch (InterruptedException e) {
-				logger.error("the thread can't sleep ", e);
-				Thread.currentThread().interrupt();
-			}
-		}
-		repeatedTask.cancel();
-		deregisterDrivers();
-	}
+	 public void destroyPool() {
+        lock.lock();
+        if (!isDestroyed.get()) {
+            for (int i = 0; i < poolSize; i++) {
+                try {
+                    availableConnections.take().relevantClose();
+                } catch (SQLException e) {
+                    logger.error("can't close connection ", e);
+                } catch (InterruptedException e) {
+                    logger.error("the thread can't sleep ", e);
+                    Thread.currentThread().interrupt();
+                }
+            }
+            repeatedTask.cancel();
+            deregisterDrivers();
+            isDestroyed.set(true);
+        }
+        lock.unlock();
+    }
 
 	/**
 	 * This method unregisters the drivers of db. It is called only one time
