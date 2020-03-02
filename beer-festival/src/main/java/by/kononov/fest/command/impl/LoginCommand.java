@@ -40,13 +40,17 @@ public class LoginCommand implements BaseCommand{
 	private static final String PARAM_PASSWORD = "password";
 	private static final String PARTNER = "partner";
 	private static final String USER = "user";
+	private UserService service;
+
+	public LoginCommand(){
+		service = new UserServiceImpl();
+	}
 
 	@Override
 	public PagePath execute(SessionRequestContent content) {
 		String page = ConfigurationManager.getProperty(PAGE_LOGIN);
 		Optional<String> login = content.getRequestParameter(PARAM_LOGIN);
 		Optional<String> password = content.getRequestParameter(PARAM_PASSWORD);
-		UserService service = new UserServiceImpl();
 		try {
 			if (service.checkLogin(login, password)) {
 				User user = service.getUser();
