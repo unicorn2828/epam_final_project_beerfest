@@ -27,15 +27,19 @@ import by.kononov.fest.service.impl.AdministratorServiceImpl;
  * @since 2020-01-10
  */
 public class BlockUserCommand implements BaseCommand{
-	final static Logger logger = LogManager.getLogger();
-	private static final String USER = "user";
-	private static final String USER_ID = "userId";
+    final static Logger logger = LogManager.getLogger();
+    private static final String USER = "user";
+    private static final String USER_ID = "userId";
+    private AdministratorService service;
+
+    public BlockUserCommand() {
+        service = new AdministratorServiceImpl();
+    }
 
 	@Override
 	public PagePath execute(SessionRequestContent content) {
 		User user = (User) content.getSessionAttributes().get(USER);
 		Optional<String> optional = content.getRequestParameter(USER_ID);
-		AdministratorService service = new AdministratorServiceImpl();
 		try {
 			service.blockUnblockUser(optional);
 		} catch (ServiceException e) {
