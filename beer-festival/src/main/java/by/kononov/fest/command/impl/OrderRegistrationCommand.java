@@ -29,17 +29,21 @@ import by.kononov.fest.service.impl.UserServiceImpl;
  */
 public class OrderRegistrationCommand implements BaseCommand{
 	final static Logger logger = LogManager.getLogger();
-	private static final String MESSAGE_TEXT = "message.booking_order";
-	private static final String MESSAGE = "message";
-	private static final String USER = "user";
-	private static final String COMMENT = "comment";
-	private static final String BAR_ID = "bar";
-	private static final String SEATS = "seats";
+    private static final String MESSAGE_TEXT = "message.booking_order";
+    private static final String MESSAGE = "message";
+    private static final String USER = "user";
+    private static final String COMMENT = "comment";
+    private static final String BAR_ID = "bar";
+    private static final String SEATS = "seats";
+    private UserService service;
+
+    public OrderRegistrationCommand() {
+        service = new UserServiceImpl();
+    }
 
 	@Override
 	public PagePath execute(SessionRequestContent content) {
 		User user = (User) content.getSessionAttributes().get(USER);
-		UserService service = new UserServiceImpl();
 		Optional<String> comment = content.getRequestParameter(COMMENT);
 		Optional<String> seats = content.getRequestParameter(SEATS);
 		Optional<String> barId = content.getRequestParameter(BAR_ID);
