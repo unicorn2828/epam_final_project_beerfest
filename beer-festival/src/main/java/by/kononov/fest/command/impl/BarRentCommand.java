@@ -32,6 +32,7 @@ import by.kononov.fest.validator.RequestContentDataValidator;
 public class BarRentCommand implements BaseCommand{
 	final static Logger logger = LogManager.getLogger();
 	private static final String MESSAGE_TEXT = "message.rent";
+	private static final String MESSAGE_ERROR = "message.error";
 	private static final String MESSAGE = "message";
 	private static final String USER = "user";
 	private static final String PARTNER = "partner";
@@ -61,6 +62,7 @@ public class BarRentCommand implements BaseCommand{
 				}
 			} catch (ServiceException e) {
 				logger.error("rent registraion failed ", e);
+				content.getRequestAttributes().put(MESSAGE, MessageManager.getProperty(MESSAGE_ERROR));
 			}
 		}
 		String url = PageReceiver.receivePage(user, HOME_PAGE);
