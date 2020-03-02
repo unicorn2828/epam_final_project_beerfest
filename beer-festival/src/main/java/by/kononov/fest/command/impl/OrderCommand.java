@@ -26,14 +26,18 @@ import by.kononov.fest.service.impl.AdministratorServiceImpl;
  * @since 2020-01-10
  */
 public class OrderCommand implements BaseCommand{
-	final static Logger logger = LogManager.getLogger();
-	private static final String ORDER_LIST = "order_list";
-	private static final String PAGE_ORDER = "path.page.admin_order";
+    final static Logger logger = LogManager.getLogger();
+    private static final String ORDER_LIST = "order_list";
+    private static final String PAGE_ORDER = "path.page.admin_order";
+    private AdministratorService service;
+
+    public OrderCommand() {
+        service = new AdministratorServiceImpl();
+    }
 
 	@Override
 	public PagePath execute(SessionRequestContent content) {
 		List<Entity> list = new ArrayList<>();
-		AdministratorService service = new AdministratorServiceImpl();
 		try {
 			list = service.receiveOrder();
 		} catch (ServiceException e) {
