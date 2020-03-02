@@ -30,6 +30,7 @@ import by.kononov.fest.validator.ImageFileValidator;
 public class UploadCommand{
 	final static Logger logger = LogManager.getLogger();
 	private static final String MESSAGE_TEXT = "message.upload_error";
+	private static final String MESSAGE = "message.error";
 	private static final String MESSAGE = "message";
 	private static final String PAGE = "path.page.home";
 	private static final String ATTRIBUTE_FILE = "file";
@@ -49,6 +50,7 @@ public class UploadCommand{
 			}
 		} catch (ServiceException | IOException e) {
 			logger.error("can't write file", e);
+			content.getRequestAttributes().put(MESSAGE, MessageManager.getProperty(MESSAGE));
 		}
 		return ConfigurationManager.getProperty(PAGE);
 	}
