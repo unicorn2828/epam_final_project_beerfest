@@ -27,6 +27,7 @@ import by.kononov.fest.service.impl.PartnerServiceImpl;
  */
 public class DeleteRentCommand implements BaseCommand{
 	final static Logger logger = LogManager.getLogger();
+	private static final String MESSAGE_TEXT = "message.error";
 	private static final String USER = "user";
 	private static final String PARTNER = "partner";
 	private PartnerService service;
@@ -44,6 +45,7 @@ public class DeleteRentCommand implements BaseCommand{
 			content.getSessionAttributes().put(USER, user);
 		} catch (ServiceException e) {
 			logger.error("delete rent failed ", e);
+			content.getRequestAttributes().put(MESSAGE, MessageManager.getProperty(MESSAGE_TEXT));
 		}
 		String url = PageReceiver.receivePage(user, HOME_PAGE);
 		return new PagePath(url);
