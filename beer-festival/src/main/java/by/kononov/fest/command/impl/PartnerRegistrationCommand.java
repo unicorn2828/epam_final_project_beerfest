@@ -31,16 +31,20 @@ import by.kononov.fest.validator.RequestContentDataValidator;
  * @since 2020-01-10
  */
 public class PartnerRegistrationCommand implements BaseCommand{
-	static final Logger logger = LogManager.getLogger();
-	private static final String MESSAGE = "message";
-	private static final String MESSAGE_TEXT = "message.partner_error";
-	private static final String USER = "user";
-	private static final String PARTNER = "partner";
-	private static final String PARAM_NAME = "name";
-	private static final String PARAM_DESCRIPTION = "description";
-	private static final String PAGE_LOGIN = "path.page.login";
-	private static final String SAME_PAGE = "path.page.partner_register";
+	 static final Logger logger = LogManager.getLogger();
+    private static final String MESSAGE = "message";
+    private static final String MESSAGE_TEXT = "message.partner_error";
+    private static final String USER = "user";
+    private static final String PARTNER = "partner";
+    private static final String PARAM_NAME = "name";
+    private static final String PARAM_DESCRIPTION = "description";
+    private static final String PAGE_LOGIN = "path.page.login";
+    private static final String SAME_PAGE = "path.page.partner_register";
+    private PartnerService service;
 
+    public PartnerRegistrationCommand() {
+        service = new PartnerServiceImpl();
+    }
 	@Override
 	public PagePath execute(SessionRequestContent content) {
 		String page = ConfigurationManager.getProperty(PAGE_LOGIN);
@@ -51,7 +55,6 @@ public class PartnerRegistrationCommand implements BaseCommand{
 		if (RequestContentDataValidator.isDataExist(optionalName, optionalDescription)) {
 			String name = optionalName.get();
 			String description = optionalDescription.get();
-			PartnerService service = new PartnerServiceImpl();
 			try {
 				if (service.checkRegistration(name)) {
 					Partner partner = service.registerPartner(partnerId, name, description);
