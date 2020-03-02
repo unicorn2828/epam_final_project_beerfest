@@ -32,12 +32,15 @@ public class BarCommand implements BaseCommand{
 	final static Logger logger = LogManager.getLogger();
 	private static final String BAR_LIST = "bar_list";
 	private static final String USER = "user";
+	private AdministratorService service;
 
+	public BarCommand(){
+		service = new AdministratorServiceImpl();
+	}
 	@Override
 	public PagePath execute(SessionRequestContent content) {
 		User user = (User) content.getSessionAttributes().get(USER);
 		List<Entity> list = new ArrayList<>();
-		AdministratorService service = new AdministratorServiceImpl();
 		try {
 			list = service.receiveBar();
 		} catch (ServiceException e) {
