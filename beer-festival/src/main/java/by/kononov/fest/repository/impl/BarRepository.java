@@ -23,19 +23,11 @@ import by.kononov.fest.specification.FestSpecification;
  * @since 2020-01-02
  */
 public class BarRepository extends BaseRepository{
-	private final static BaseRepository INSTANCE = new BarRepository();
 	public static final String SQL_INSERT_BAR =
 			"INSERT INTO fest.bar (bar_id, available_seats, bar_description, bar_status, bar_name) VALUES (?, ?, ?, ?, ?)";
 	public static final String SQL_DELETE_BAR = "DELETE FROM fest.bar WHERE user_id = ?";
 	public static final String SQL_UPDATE_BAR =
 			"UPDATE fest.bar SET available_seats = ?, bar_description = ?, bar_status = ?, bar_name = ? WHERE bar_id = ?";
-
-	private BarRepository() {
-	}
-
-	public static BaseRepository getInstance() {
-		return INSTANCE;
-	}
 
 	@Override
 	public void addEntity(Entity entity) throws RepositoryException {
