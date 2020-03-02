@@ -38,6 +38,7 @@ public class RegistrationCommand implements BaseCommand{
 	private static final String PARAM_EMAIL = "email";
 	private static final String PARAM_ROLE = "role";
 	private static final String MESSAGE_REGISTRATION = "message.login_change";
+	private static final String MESSAGE_ERROR = "message.error";
 	private static final String MESSAGE = "message";
 	private static final String PAGE_REGISTRATION = "path.page.partner_register";
         private UserService service;
@@ -69,6 +70,7 @@ public class RegistrationCommand implements BaseCommand{
 			}
 		} catch (ServiceException e) {
 			logger.error("registration failed ", e);
+			content.getRequestAttributes().put(MESSAGE, MessageManager.getProperty(MESSAGE_ERROR));
 			page = ConfigurationManager.getProperty(PAGE_LOGIN);
 		}
 		if (user != null && UserRole.USER.equals(user.getRole()) && !user.getEmail().isEmpty()) {
@@ -76,6 +78,7 @@ public class RegistrationCommand implements BaseCommand{
 				MailSender.sendMail(user.getEmail());
 			} catch (ServiceException e) {
 				logger.error("mail sending failed ", e);
+				content.getRequestAttributes().put(MESSAGE, MessageManager.getProperty(MESSAGE_ERROR));
 			}
 		}
 		return new PagePath(page);
