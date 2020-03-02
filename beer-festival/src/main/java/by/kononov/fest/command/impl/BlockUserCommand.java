@@ -28,6 +28,7 @@ import by.kononov.fest.service.impl.AdministratorServiceImpl;
  */
 public class BlockUserCommand implements BaseCommand{
     final static Logger logger = LogManager.getLogger();
+    private static final String MESSAGE_TEXT = "message.error";
     private static final String USER = "user";
     private static final String USER_ID = "userId";
     private AdministratorService service;
@@ -44,6 +45,7 @@ public class BlockUserCommand implements BaseCommand{
 			service.blockUnblockUser(optional);
 		} catch (ServiceException e) {
 			logger.error("can't change status ", e);
+			content.getRequestAttributes().put(MESSAGE, MessageManager.getProperty(MESSAGE_TEXT));
 		}
 		String url = PageReceiver.receivePage(user, HOME_PAGE);
 		return new PagePath(url);
