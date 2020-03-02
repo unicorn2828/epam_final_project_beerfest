@@ -34,6 +34,7 @@ public class PartnerRegistrationCommand implements BaseCommand{
 	 static final Logger logger = LogManager.getLogger();
     private static final String MESSAGE = "message";
     private static final String MESSAGE_TEXT = "message.partner_error";
+    private static final String MESSAGE_ERROR = "message.error";
     private static final String USER = "user";
     private static final String PARTNER = "partner";
     private static final String PARAM_NAME = "name";
@@ -69,6 +70,7 @@ public class PartnerRegistrationCommand implements BaseCommand{
 				}
 			} catch (ServiceException e) {
 				logger.error("registration failed ", e);
+				content.getRequestAttributes().put(MESSAGE, MessageManager.getProperty(MESSAGE_ERROR));
 				page = ConfigurationManager.getProperty(PAGE_LOGIN);
 			}
 		}
