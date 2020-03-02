@@ -29,6 +29,7 @@ import by.kononov.fest.service.impl.AdministratorServiceImpl;
  */
 public class PartnerCommand implements BaseCommand{
 	final static Logger logger = LogManager.getLogger();
+	private static final String MESSAGE_TEXT = "message.error";
 	private static final String PARTNER_LIST = "partner_list";
 	private static final String PAGE_PARTNER = "path.page.admin_partner";
 	private AdministratorService service;
@@ -45,6 +46,7 @@ public class PartnerCommand implements BaseCommand{
 			list.sort(Comparator.comparingLong(e -> ((Partner) e).getPartnerId()));
 		} catch (ServiceException e) {
 			logger.error("receive partners failed ", e);
+			content.getRequestAttributes().put(MESSAGE, MessageManager.getProperty(MESSAGE_TEXT));
 		}
 		content.getSessionAttributes().put(PARTNER_LIST, list);
 		String url = ConfigurationManager.getProperty(PAGE_PARTNER);
