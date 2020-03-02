@@ -29,12 +29,16 @@ public class DeleteRentCommand implements BaseCommand{
 	final static Logger logger = LogManager.getLogger();
 	private static final String USER = "user";
 	private static final String PARTNER = "partner";
+	private PartnerService service;
+
+	public DeleteRentCommand(){
+		service = new PartnerServiceImpl();
+	}
 
 	@Override
 	public PagePath execute(SessionRequestContent content) {
 		User user = (User) content.getSessionAttributes().get(USER);
 		Partner partner = (Partner) content.getSessionAttributes().get(PARTNER);
-		PartnerService service = new PartnerServiceImpl();
 		try {
 			user = service.deleteRent(user, partner);
 			content.getSessionAttributes().put(USER, user);
