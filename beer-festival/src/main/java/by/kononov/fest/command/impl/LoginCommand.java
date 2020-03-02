@@ -33,6 +33,7 @@ import by.kononov.fest.service.impl.UserServiceImpl;
 public class LoginCommand implements BaseCommand{
 	static final Logger logger = LogManager.getLogger();
 	private static final String MESSAGE_TEXT = "message.login_error";
+	private static final String MESSAGE_ERROR = "message.error";
 	private static final String MESSAGE = "message";
 	private static final String PAGE_LOGIN = "path.page.login";
 	private static final String PAGE_BLOCK = "/jsp/block.jsp";
@@ -68,6 +69,7 @@ public class LoginCommand implements BaseCommand{
 			}
 		} catch (ServiceException e) {
 			logger.error("log in command failed ", e);
+			content.getRequestAttributes().put(MESSAGE, MessageManager.getProperty(MESSAGE_ERROR));
 		}
 		return new PagePath(page);
 	}
