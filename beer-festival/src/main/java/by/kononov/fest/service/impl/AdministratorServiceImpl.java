@@ -42,18 +42,16 @@ public class AdministratorServiceImpl implements AdministratorService{
 	static final Logger logger = LogManager.getLogger();
 	private static final int PAGINATION_LIMIT = 5;
 	private static final int DEFAULT_PAGE_NUMBER = 0;
-	private Transaction transaction;
 	private Repository barRepository;
 	private Repository userRepository;
 	private Repository orderRepository;
 	private Repository partnerRepository;
 
 	public AdministratorServiceImpl() {
-		transaction = new TransactionImpl();
-		barRepository = BarRepository.getInstance();
-		userRepository = UserRepository.getInstance();
-		orderRepository = OrderRepository.getInstance();
-		partnerRepository = PartnerRepository.getInstance();
+		barRepository = new BarRepository();
+		userRepository = new UserRepository();
+		orderRepository = new OrderRepository();
+		partnerRepository = new PartnerRepository();
 	}
 
 	@Override
@@ -126,17 +124,19 @@ public class AdministratorServiceImpl implements AdministratorService{
 		if (RequestContentDataValidator.isDataExist(optional)) {
 			String userId = optional.get();
 			FestSpecification specification = new ReceivingUserByIdSpecification(userId);
-			transaction.beginTransaction(userRepository);
+			Transaction transaction = new TransactionImpl();
+			UserRepository userInRepositoryTransaction = new UserRepository();
+			transaction.beginTransaction(userInRepositoryTransaction);
 			try {
-				List<Entity> list = userRepository.query(specification);
+				List<Entity> list = userInRepositoryTransaction.query(specification);
 				currentUser = (User) list.get(0);
 				if (User.UserStatus.VALID.equals(currentUser.getStatus())) {
 					currentUser.setStatus(User.UserStatus.BLOCK);
-					userRepository.updateEntity(currentUser);
+					userInRepositoryTransaction.updateEntity(currentUser);
 					transaction.commit();
 				} else {
 					currentUser.setStatus(User.UserStatus.VALID);
-					userRepository.updateEntity(currentUser);
+					userInRepositoryTransaction.updateEntity(currentUser);
 					transaction.commit();
 				}
 			} catch (RepositoryException e) {
