@@ -19,10 +19,7 @@ import by.kononov.fest.transaction.Transaction;
  * @since 2020-01-20
  */
 public class TransactionImpl implements Transaction{
-	private static final Logger logger = LogManager.getLogger();
-	/**
-	 * Represents the connection.
-	 */
+	static final Logger logger = LogManager.getLogger();
 	private Connection connection;
 
 	@Override
