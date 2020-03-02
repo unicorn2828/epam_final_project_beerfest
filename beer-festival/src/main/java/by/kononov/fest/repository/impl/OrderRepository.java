@@ -23,19 +23,11 @@ import by.kononov.fest.specification.FestSpecification;
  * @since 2020-01-02
  */
 public class OrderRepository extends BaseRepository{
-	private final static BaseRepository INSTANCE = new OrderRepository();
 	public static final String SQL_INSERT_ORDER =
 			"INSERT INTO fest.order (order_id, order_bar, order_seats, order_comment) VALUES (?, ?, ?, ?)";
 	public static final String SQL_DELETE_ORDER = "DELETE FROM fest.order WHERE order_id = ?";
 	public static final String SQL_UPDATE_ORDER =
 			"UPDATE fest.order SET order_bar = ?, order_seats = ?, order_comment = ? WHERE order_id = ?";
-
-	private OrderRepository() {
-	}
-
-	public static BaseRepository getInstance() {
-		return INSTANCE;
-	}
 
 	@Override
 	public void addEntity(Entity order) throws RepositoryException {
