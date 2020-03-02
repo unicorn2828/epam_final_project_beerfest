@@ -32,14 +32,10 @@ import by.kononov.fest.transaction.impl.TransactionImpl;
 public class UploadServiceImpl implements UploadService{
 	static final Logger logger = LogManager.getLogger();
 	private static final String UPLOAD_DIRECTORY = "images\\avatar\\";
-	private Repository userRepository;
-	private Transaction transaction;
 	private String realPath;
 	private Part part;
 
 	public UploadServiceImpl(String realPath, Part part) {
-		userRepository = UserRepository.getInstance();
-		transaction = new TransactionImpl();
 		this.realPath = realPath;
 		this.part = part;
 	}
@@ -53,9 +49,11 @@ public class UploadServiceImpl implements UploadService{
 	public void updateUser(User user, String filePath) throws ServiceException {
 		String fileName = receiveRandomFileName(filePath);
 		user.setAvatarUrl(fileName);
-		transaction.beginTransaction(userRepository);
+		Transaction transaction = new TransactionImpl();
+		UserRepository userInRepositoryTransaction = new UserRepository();
+		transaction.beginTransaction(userInRepositoryTransaction);
 		try {
-			userRepository.updateEntity(user);
+			userInRepositoryTransaction.updateEntity(user);
 			transaction.commit();
 		} catch (RepositoryException e) {
 			transaction.rollback();
