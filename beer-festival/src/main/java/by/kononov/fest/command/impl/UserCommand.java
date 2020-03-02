@@ -28,15 +28,19 @@ import by.kononov.fest.service.impl.AdministratorServiceImpl;
  */
 public class UserCommand implements BaseCommand{
 	final static Logger logger = LogManager.getLogger();
-	private static final String ATTRIBUTE_MAX_VALUE = "maxValue";
-	private static final String PARAMETER_PAGE_NUMBER = "pageNumber";
-	private static final String USER_LIST = "user_list";
-	private static final String PAGE_USER = "path.page.admin_user";
+    private static final String ATTRIBUTE_MAX_VALUE = "maxValue";
+    private static final String PARAMETER_PAGE_NUMBER = "pageNumber";
+    private static final String USER_LIST = "user_list";
+    private static final String PAGE_USER = "path.page.admin_user";
+    private AdministratorService service;
+
+    public UserCommand(){
+    	service = new AdministratorServiceImpl();
+	}
 
 	@Override
 	public PagePath execute(SessionRequestContent content) {
 		List<Entity> list = new ArrayList<>();
-		AdministratorService service = new AdministratorServiceImpl();
 		try {
 			int pagesCount = service.countPages();
 			content.setAttribute(ATTRIBUTE_MAX_VALUE, pagesCount);
