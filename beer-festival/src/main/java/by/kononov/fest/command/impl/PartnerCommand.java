@@ -31,11 +31,15 @@ public class PartnerCommand implements BaseCommand{
 	final static Logger logger = LogManager.getLogger();
 	private static final String PARTNER_LIST = "partner_list";
 	private static final String PAGE_PARTNER = "path.page.admin_partner";
+	private AdministratorService service;
+
+	public PartnerCommand(){
+		service = new AdministratorServiceImpl();
+	}
 
 	@Override
 	public PagePath execute(SessionRequestContent content) {
 		List<Entity> list = new ArrayList<>();
-		AdministratorService service = new AdministratorServiceImpl();
 		try {
 			list = service.receivePartner();
 			list.sort(Comparator.comparingLong(e -> ((Partner) e).getPartnerId()));
