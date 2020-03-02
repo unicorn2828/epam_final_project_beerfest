@@ -87,24 +87,24 @@ public enum ConnectionPool {
 	 *
 	 * @param connection - the connection for return
 	 */
-	public boolean releaseConnection(Connection connection) {
-		boolean isReleased = false;
-		if (connection instanceof ProxyConnection) {
-			try {
-				if (!connection.getAutoCommit()) {
-					connection.setAutoCommit(true);
-				}
-			} catch (SQLException e) {
-				logger.error("can't set auto commit ", e);
-			}
-			ProxyConnection proxyConnection = (ProxyConnection) connection;
-			givenAwayConnections.remove(proxyConnection);
-			isReleased = availableConnections.offer(proxyConnection);
-		} else {
-			logger.warn("incorrect type of connection {}", connection);
-		}
-		return isReleased;
-	}
+	 public boolean releaseConnection(Connection connection) {
+        boolean isReleased = false;
+        if (connection instanceof ProxyConnection && givenAwayConnections.contains(connection)) {
+            try {
+                if (!connection.getAutoCommit()) {
+                    connection.setAutoCommit(true);
+                }
+            } catch (SQLException e) {
+                logger.error("can't set auto commit ", e);
+            }
+            givenAwayConnections.remove(connection);
+            ProxyConnection proxyConnection = (ProxyConnection) connection;
+            isReleased = availableConnections.offer(proxyConnection);
+        } else {
+            logger.warn("incorrect type of connection {}", connection);
+        }
+        return isReleased;
+    }
 
 	/**
 	 * This method destroys the connection pool. It is called only one time
