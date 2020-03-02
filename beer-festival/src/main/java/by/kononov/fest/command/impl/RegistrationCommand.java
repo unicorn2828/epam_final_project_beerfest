@@ -40,7 +40,12 @@ public class RegistrationCommand implements BaseCommand{
 	private static final String MESSAGE_REGISTRATION = "message.login_change";
 	private static final String MESSAGE = "message";
 	private static final String PAGE_REGISTRATION = "path.page.partner_register";
+        private UserService service;
 
+        public RegistrationCommand(){
+    	       service = new UserServiceImpl();
+	}
+	
 	@Override
 	public PagePath execute(SessionRequestContent content) {
 		User user = null;
@@ -49,7 +54,6 @@ public class RegistrationCommand implements BaseCommand{
 		Optional<String> optionalPassword = content.getRequestParameter(PARAM_PASSWORD);
 		Optional<String> optionalEmail = content.getRequestParameter(PARAM_EMAIL);
 		Optional<String> optionalRole = content.getRequestParameter(PARAM_ROLE);
-		UserService service = new UserServiceImpl();
 		try {
 			if (service.register(optionalLogin, optionalPassword, optionalEmail, optionalRole)) {
 				user = service.getUser();
