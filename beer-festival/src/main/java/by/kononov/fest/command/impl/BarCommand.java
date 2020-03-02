@@ -30,6 +30,7 @@ import by.kononov.fest.service.impl.AdministratorServiceImpl;
  */
 public class BarCommand implements BaseCommand{
 	final static Logger logger = LogManager.getLogger();
+	private static final String MESSAGE_TEXT = "message.error";
 	private static final String BAR_LIST = "bar_list";
 	private static final String USER = "user";
 	private AdministratorService service;
@@ -45,6 +46,7 @@ public class BarCommand implements BaseCommand{
 			list = service.receiveBar();
 		} catch (ServiceException e) {
 			logger.error("receive bar failed ", e);
+			content.getRequestAttributes().put(MESSAGE, MessageManager.getProperty(MESSAGE_TEXT));
 		}
 		content.getSessionAttributes().put(BAR_LIST, list);
 		String url = PageReceiver.receivePage(user, BAR_PAGE);
