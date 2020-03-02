@@ -29,15 +29,14 @@ public enum ConnectionPool {
 	INSTANCE;
 
 	static final Logger logger = LogManager.getLogger();
+	private static AtomicBoolean isDestroyed = new AtomicBoolean(false);
+	private Lock lock;
 	private static final long MINUTES_10 = 600_000L;
 	private BlockingQueue<ProxyConnection> availableConnections;
 	private Queue<ProxyConnection> givenAwayConnections;
 	private TimerTask repeatedTask;
 	private int poolSize;
 
-	/**
-	 * The private class constructor; it calls the init method.
-	 */
 	private ConnectionPool() {
 		init();
 	}
@@ -48,6 +47,7 @@ public enum ConnectionPool {
 	 * @return proxyConnection - the connection from connection pool
 	 */
 	private void init() {
+		lock = new ReentrantLock();
 		poolSize = Integer.parseInt(ConnectionManager.getPoolSize(KEY_POOL_SIZE));
 		availableConnections = new LinkedBlockingQueue<>(poolSize);
 		givenAwayConnections = new ArrayDeque<>();
