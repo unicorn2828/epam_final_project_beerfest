@@ -25,13 +25,17 @@ import by.kononov.fest.service.impl.UserServiceImpl;
  * @since 2020-01-10
  */
 public class DeleteOrderCommand implements BaseCommand{
-	final static Logger logger = LogManager.getLogger();
-	private static final String USER = "user";
+    final static Logger logger = LogManager.getLogger();
+    private static final String USER = "user";
+    private UserService service;
+
+    public DeleteOrderCommand() {
+        service = new UserServiceImpl();
+    }
 
 	@Override
 	public PagePath execute(SessionRequestContent content) {
 		User user = (User) content.getSessionAttributes().get(USER);
-		UserService service = new UserServiceImpl();
 		try {
 			user = service.deleteOrder(user);
 			content.getSessionAttributes().put(USER, user);
