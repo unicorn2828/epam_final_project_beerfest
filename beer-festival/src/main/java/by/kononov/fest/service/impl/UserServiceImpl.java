@@ -43,16 +43,12 @@ public class UserServiceImpl implements UserService{
     private static final Pattern INT_REGEX = Pattern.compile("\\d{1,3}");
     private static final String DEFAULT = "default";
     private Repository partnerRepository;
-    private Repository orderRepository;
     private Repository userRepository;
-    private Repository barRepository;
     private User currentUser;
 
     public UserServiceImpl() {
         partnerRepository = new PartnerRepository();
-        orderRepository = new OrderRepository();
         userRepository = new UserRepository();
-        barRepository = new BarRepository();
     }
 
     @Override
