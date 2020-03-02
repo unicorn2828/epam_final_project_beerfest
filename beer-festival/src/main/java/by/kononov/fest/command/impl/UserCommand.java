@@ -27,7 +27,8 @@ import by.kononov.fest.service.impl.AdministratorServiceImpl;
  * @since 2020-01-10
  */
 public class UserCommand implements BaseCommand{
-	final static Logger logger = LogManager.getLogger();
+    final static Logger logger = LogManager.getLogger();
+    private static final String MESSAGE_TEXT = "message.error";
     private static final String ATTRIBUTE_MAX_VALUE = "maxValue";
     private static final String PARAMETER_PAGE_NUMBER = "pageNumber";
     private static final String USER_LIST = "user_list";
@@ -52,6 +53,7 @@ public class UserCommand implements BaseCommand{
 			list = service.receiveUser(pageNumber);
 		} catch (ServiceException e) {
 			logger.error("receive users failed ", e);
+			content.getRequestAttributes().put(MESSAGE, MessageManager.getProperty(MESSAGE_TEXT));
 		}
 		content.getSessionAttributes().put(USER_LIST, list);
 		String url = ConfigurationManager.getProperty(PAGE_USER);
