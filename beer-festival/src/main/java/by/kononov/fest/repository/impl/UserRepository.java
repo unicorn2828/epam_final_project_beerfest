@@ -22,21 +22,12 @@ import by.kononov.fest.specification.FestSpecification;
 import by.kononov.fest.specification.impl.ReceivingAmountAllUsersSpecification;
 
 public class UserRepository extends BaseRepository{
-	static final Logger logger = LogManager.getLogger();
-	private final static BaseRepository INSTANCE = new UserRepository();
 	public static final String ROW_COUNT = "rowcount";
 	public static final String SQL_INSERT_USER =
 			"INSERT INTO fest.user (login, password, email, user_role, user_status, user_order, avatar_url) VALUES (?, ?, ?, ?, ?, ?, ?)";
 	public static final String SQL_DELETE_USER = "DELETE FROM fest.user WHERE user_id = ?";
 	public static final String SQL_UPDATE_USER =
 			"UPDATE fest.user SET login = ?, user_role = ?, user_status = ?, user_order = ?, avatar_url = ? WHERE user_id = ?";
-
-	private UserRepository() {
-	}
-
-	public static BaseRepository getInstance() {
-		return INSTANCE;
-	}
 
 	@Override
 	public void addEntity(Entity user) throws RepositoryException {
@@ -88,9 +79,7 @@ public class UserRepository extends BaseRepository{
 			} else {
 				EntityFactory.getInstance().produce(resultSet, userList, EntityType.USER);
 			}
-		} catch (
-
-		SQLException e) {
+		} catch (SQLException e) {
 			throw new RepositoryException("select user from db failed ", e);
 		}
 		return userList;
