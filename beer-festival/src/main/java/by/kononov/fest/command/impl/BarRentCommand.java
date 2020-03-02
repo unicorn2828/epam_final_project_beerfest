@@ -38,6 +38,11 @@ public class BarRentCommand implements BaseCommand{
 	private static final String COMMENT = "comment";
 	private static final String BAR_ID = "bar";
 	private static final String BAR_NAME = "bar_name";
+	private PartnerService service;
+
+	public BarRentCommand(){
+		service = new PartnerServiceImpl();
+	}
 
 	@Override
 	public PagePath execute(SessionRequestContent content) {
@@ -46,7 +51,6 @@ public class BarRentCommand implements BaseCommand{
 		Optional<String> optionalComment = content.getRequestParameter(COMMENT);
 		Optional<String> optionalBarName = content.getRequestParameter(BAR_NAME);
 		Optional<String> optionalBarId = content.getRequestParameter(BAR_ID);
-		PartnerService service = new PartnerServiceImpl();
 		if (RequestContentDataValidator.isDataExist(optionalComment, optionalBarName, optionalBarId)) {
 			String comment = optionalComment.get();
 			String barName = optionalBarName.get();
