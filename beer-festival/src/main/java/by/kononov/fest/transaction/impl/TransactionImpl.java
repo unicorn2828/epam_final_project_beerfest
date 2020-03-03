@@ -20,10 +20,12 @@ import by.kononov.fest.transaction.Transaction;
  */
 public class TransactionImpl implements Transaction{
 	static final Logger logger = LogManager.getLogger();
+	private static Lock lock = new ReentrantLock();
 	private Connection connection;
 
 	@Override
 	public void beginTransaction(Repository... repositories) {
+		lock.lock();
 		if (connection == null) {
 			connection = ConnectionPool.INSTANCE.takeConnection();
 		}
@@ -33,19 +35,23 @@ public class TransactionImpl implements Transaction{
 			logger.error("set auto commit failed ", e);
 		}
 		Arrays.asList(repositories).forEach(repository -> repository.setConnection(connection));
+		lock.unlock();
 	}
 
 	@Override
 	public void commit() {
+		lock.lock();
 		try {
 			connection.commit();
 		} catch (SQLException e) {
 			logger.error("commit failed ", e);
 		}
+		lock.unlock();
 	}
 
 	@Override
 	public void endTransaction() {
+		lock.lock();
 		if (connection != null) {
 			try {
 				connection.setAutoCommit(true);
@@ -59,14 +65,17 @@ public class TransactionImpl implements Transaction{
 			}
 			connection = null;
 		}
+		lock.unlock();
 	}
 
 	@Override
 	public void rollback() {
+		lock.lock();
 		try {
 			connection.rollback();
 		} catch (SQLException e) {
 			logger.error("rollback failed ", e);
 		}
+		lock.unlock();
 	}
 }
