@@ -28,7 +28,7 @@ class ConnectionProvider{
 	private ConnectionProvider() {
 	}
 
-	static Optional<Connection> getConnection() {
+	static Connection getConnection() {
 		Properties properties = ConnectionManager.getProperty();
 		String url = ConnectionManager.getURL(KEY_URL);
 		Connection connection = null;
@@ -37,6 +37,6 @@ class ConnectionProvider{
 		} catch (SQLException e) {
 			logger.error("can't get connection ", e);
 		}
-		return Optional.of(connection);
+		return connection;
 	}
 }
