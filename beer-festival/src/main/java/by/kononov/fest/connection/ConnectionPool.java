@@ -47,14 +47,13 @@ public enum ConnectionPool {
 	 * @return proxyConnection - the connection from connection pool
 	 */
 	private void init() {
-		lock = new ReentrantLock();
 		poolSize = Integer.parseInt(ConnectionManager.getPoolSize(KEY_POOL_SIZE));
 		availableConnections = new LinkedBlockingQueue<>(poolSize);
 		givenAwayConnections = new ArrayDeque<>();
 		for (int i = 0; i < poolSize; i++) {
-			Optional<Connection> optional = ConnectionProvider.getConnection();
-			if (optional.isPresent()) {
-				ProxyConnection proxyConnection = new ProxyConnection(optional.get());
+			Connection connection = ConnectionProvider.getConnection();
+			if (connection != null) {
+				ProxyConnection proxyConnection = new ProxyConnection(connection);
 				availableConnections.offer(proxyConnection);
 			}
 		}
@@ -156,17 +155,17 @@ public enum ConnectionPool {
 				@Override
 				public void run() {
 					if ((givenAwayConnections.size() + availableConnections.size()) < poolSize) {
-						Optional<Connection> optional = ConnectionProvider.getConnection();
-						if (optional.isPresent()) {
-							ProxyConnection proxyConnection = new ProxyConnection(optional.get());
+						Connection connection = ConnectionProvider.getConnection();
+						if (connection != null) {
+							ProxyConnection proxyConnection = new ProxyConnection(connection);
 							availableConnections.add(proxyConnection);
 						}
 					}
 				}
 			};
 			Timer timer = new Timer();
-			long delay = MINUTES_10;
-			long period = MINUTES_10;
+			long delay = MINUTES_5;
+			long period = MINUTES_5;
 			timer.scheduleAtFixedRate(repeatedTask, delay, period);
 		}
 	}
